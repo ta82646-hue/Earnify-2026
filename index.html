@@ -40,10 +40,9 @@
             </div>
             <div>
                 <div class="flex items-center gap-1.5">
-                    <span class="text-xs font-bold tracking-wider text-[#22D3EE] uppercase">Elite Member</span>
-                    <span class="px-1.5 py-0.2 bg-[#8B5CF6]/20 border border-[#8B5CF6]/30 text-[#8B5CF6] text-[10px] font-extrabold rounded-md">LVL 4</span>
+                    <span class="text-xs font-bold tracking-wider text-[#22D3EE] uppercase">Earnify 2026</span>
                 </div>
-                <h1 class="text-sm font-extrabold text-white tracking-tight">Earnify 2026 User</h1>
+                <h1 id="header-username" class="text-sm font-extrabold text-white tracking-tight">Loading User...</h1>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -65,21 +64,21 @@
                     <div>
                         <span class="text-xs font-semibold text-white/60 tracking-wider uppercase">Total Balance</span>
                         <div class="flex items-baseline gap-2 mt-0.5">
-                            <span id="main-balance" class="text-3xl font-black tracking-tight text-white">🪙 1,450.00</span>
+                            <span id="main-balance" class="text-3xl font-black tracking-tight text-white">🪙 0.00</span>
                         </div>
                     </div>
                     <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold flex items-center gap-1">
-                        <i data-lucide="sparkles" class="w-3 h-3"></i> +12.4% today
+                        <i data-lucide="sparkles" class="w-3 h-3"></i> Active
                     </span>
                 </div>
                 <div class="grid grid-cols-2 gap-3 pt-3 border-t border-white/[0.06] mb-4">
                     <div>
                         <span class="text-[11px] text-white/50 block">Today's Earnings</span>
-                        <span class="text-sm font-bold text-[#22D3EE]">+340.00 Coins</span>
+                        <span id="stat-today-earnings" class="text-sm font-bold text-[#22D3EE]">+0.00 Coins</span>
                     </div>
                     <div>
                         <span class="text-[11px] text-white/50 block">Weekly Streak</span>
-                        <span class="text-sm font-bold text-[#8B5CF6]">🔥 5 Days Active</span>
+                        <span id="stat-streak" class="text-sm font-bold text-[#8B5CF6]">🔥 0 Days Active</span>
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -93,11 +92,11 @@
             <div class="grid grid-cols-2 gap-2.5">
                 <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex flex-col justify-between">
                     <span class="text-[11px] text-white/50 font-medium">Tasks Done</span>
-                    <span id="stat-tasks-done" class="text-base font-extrabold text-white mt-1">42 / 50</span>
+                    <span id="stat-tasks-done" class="text-base font-extrabold text-white mt-1">0</span>
                 </div>
                 <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex flex-col justify-between">
                     <span class="text-[11px] text-white/50 font-medium">Global Rank</span>
-                    <span class="text-base font-extrabold text-[#8B5CF6] mt-1">#142</span>
+                    <span id="stat-global-rank" class="text-base font-extrabold text-[#8B5CF6] mt-1">#--</span>
                 </div>
             </div>
 
@@ -108,7 +107,7 @@
                     <span class="text-xs text-[#22D3EE] font-semibold">Live Streams</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5">
-                    <div onclick="playRewardedAd(50, 'Daily Check-In Verified! +50 Coins')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#8B5CF6]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                    <div onclick="playDailyCheckIn()" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#8B5CF6]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div class="w-10 h-10 rounded-xl bg-[#8B5CF6]/20 border border-[#8B5CF6]/30 flex items-center justify-center text-lg">🎁</div>
                         <div>
@@ -116,20 +115,20 @@
                             <span class="text-[11px] text-[#22D3EE] font-bold">+50 Coins</span>
                         </div>
                     </div>
-                    <div onclick="playPopupAd(100, 'Lucky Spin Rewarded! +100 Coins')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#22D3EE]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                    <div onclick="playSpinWheel()" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#22D3EE]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-r from-[#22D3EE]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div class="w-10 h-10 rounded-xl bg-[#22D3EE]/20 border border-[#22D3EE]/30 flex items-center justify-center text-lg">🎯</div>
                         <div>
                             <h4 class="text-xs font-bold text-white">Spin Wheel</h4>
-                            <span class="text-[11px] text-[#22D3EE] font-bold">Up to 100</span>
+                            <span class="text-[11px] text-[#22D3EE] font-bold">+100 Coins</span>
                         </div>
                     </div>
-                    <div onclick="playRewardedAd(75, 'Ad Stream Completed! +75 Coins')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#8B5CF6]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                    <div onclick="playWatchAds()" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#8B5CF6]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div class="w-10 h-10 rounded-xl bg-[#8B5CF6]/20 border border-[#8B5CF6]/30 flex items-center justify-center text-lg">📺</div>
                         <div>
                             <h4 class="text-xs font-bold text-white">Watch Ads</h4>
-                            <span class="text-[11px] text-[#22D3EE] font-bold">+75 Coins</span>
+                            <span class="text-[11px] text-[#22D3EE] font-bold">+100 Coins</span>
                         </div>
                     </div>
                     <div onclick="switchTab('rewards')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#22D3EE]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
@@ -148,7 +147,7 @@
                 <div class="space-y-1">
                     <span class="px-2 py-0.5 rounded bg-[#8B5CF6] text-white text-[9px] font-black uppercase tracking-wider">Announcement</span>
                     <h4 class="text-xs font-bold text-white">Earnify 2026 Elite Season is Live!</h4>
-                    <p class="text-[11px] text-white/60">Double bonus multipliers activated for all Tier-1 users.</p>
+                    <p class="text-[11px] text-white/60">Double bonus multipliers activated for all Telegram users.</p>
                 </div>
                 <i data-lucide="chevron-right" class="w-5 h-5 text-white/40"></i>
             </div>
@@ -162,34 +161,12 @@
                 <button onclick="filterTasks('social', this)" class="task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-white/[0.03] text-white/60 border border-white/[0.06] hover:bg-white/[0.06] cursor-pointer">social</button>
                 <button onclick="filterTasks('games', this)" class="task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-white/[0.03] text-white/60 border border-white/[0.06] hover:bg-white/[0.06] cursor-pointer">games</button>
             </div>
-            <div class="space-y-3">
-                <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 flex items-center justify-between hover:border-[#8B5CF6]/40 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-xl">📢</div>
-                        <div>
-                            <h4 class="text-xs font-bold text-white">Subscribe to Telegram Channel</h4>
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-[11px] font-bold text-[#22D3EE]">+150 Coins</span>
-                                <span class="text-[10px] text-white/40">• 30s</span>
-                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.05] text-white/70">Easy</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="playRewardedAd(150, 'Task Verified Successfully! Reward Claimed.')" class="px-3.5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-xs font-bold text-white hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-all cursor-pointer">Start</button>
-                </div>
-                <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 flex items-center justify-between hover:border-[#8B5CF6]/40 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-xl">⚡</div>
-                        <div>
-                            <h4 class="text-xs font-bold text-white">Test Next-Gen WebApp Protocol</h4>
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-[11px] font-bold text-[#22D3EE]">+300 Coins</span>
-                                <span class="text-[10px] text-white/40">• 2m</span>
-                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.05] text-white/70">Medium</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="playRewardedAd(300, 'Task Verified Successfully! Reward Claimed.')" class="px-3.5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-xs font-bold text-white hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-all cursor-pointer">Start</button>
+            <!-- Empty Task Feed as requested -->
+            <div id="tasks-container" class="space-y-3">
+                <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-8 text-center space-y-2">
+                    <div class="text-3xl">📭</div>
+                    <h4 class="text-xs font-bold text-white">No active tasks right now</h4>
+                    <p class="text-[11px] text-white/50">Check back later for new earning protocols and bounties.</p>
                 </div>
             </div>
         </div>
@@ -202,13 +179,13 @@
                     <h3 class="text-sm font-extrabold text-white">Elite Mystery Box</h3>
                     <p class="text-xs text-white/60 mt-0.5">Unlock daily milestone chests for guaranteed token payouts.</p>
                 </div>
-                <button onclick="playRewardedAd(250, 'Mystery Box Unlocked! +250 Coins')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] text-gray-950 font-black text-xs shadow-lg hover:opacity-90 transition-all cursor-pointer">Open Mystery Chest</button>
+                <button onclick="playMysteryBox()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] text-gray-950 font-black text-xs shadow-lg hover:opacity-90 transition-all cursor-pointer">Open Mystery Chest</button>
             </div>
             <div class="space-y-2.5">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-white/60">Milestone Achievements</h3>
                 <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 space-y-2">
-                    <div class="flex justify-between items-center"><span class="text-xs font-bold text-white">Complete 100 Tasks</span><span class="text-[11px] font-bold text-[#22D3EE]">1,000 Coins</span></div>
-                    <div class="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden"><div class="h-full bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] w-[42%]"></div></div>
+                    <div class="flex justify-between items-center"><span class="text-xs font-bold text-white">Complete 100 Tasks</span><span class="text-[11px] font-bold text-[#22D3EE]">10,000 Coins</span></div>
+                    <div class="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden"><div id="task-progress-bar" class="h-full bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] w-[0%]"></div></div>
                 </div>
             </div>
         </div>
@@ -221,13 +198,13 @@
                     <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">Secure Gateway</span>
                 </div>
                 <div>
-                    <h2 id="wallet-balance" class="text-3xl font-black text-white">🪙 1,450.00</h2>
-                    <span id="wallet-bdt" class="text-xs text-white/50">≈ ৳14.50 BDT</span>
+                    <h2 id="wallet-balance" class="text-3xl font-black text-white">🪙 0.00</h2>
+                    <span id="wallet-bdt" class="text-xs text-white/50">≈ ৳0.00 BDT</span>
                 </div>
                 <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/[0.06]">
                     <div><span class="text-[10px] text-white/50 block">Pending</span><span class="text-xs font-bold text-amber-400">0.00 Coins</span></div>
-                    <div><span class="text-[10px] text-white/50 block">Total Earned</span><span class="text-xs font-bold text-[#22D3EE]">4,850 Coins</span></div>
-                    <div><span class="text-[10px] text-white/50 block">Min Payout</span><span class="text-xs font-bold text-[#8B5CF6]">500 Coins</span></div>
+                    <div><span id="wallet-total-earned" class="text-[10px] text-white/50 block">Total Earned</span><span class="text-xs font-bold text-[#22D3EE]">0 Coins</span></div>
+                    <div><span class="text-[10px] text-white/50 block">Min Payout</span><span class="text-xs font-bold text-[#8B5CF6]">10,000 Coins</span></div>
                 </div>
             </div>
 
@@ -250,8 +227,8 @@
                         <input id="withdraw-number" type="tel" placeholder="017XXXXXXXX" class="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#8B5CF6]">
                     </div>
                     <div>
-                        <label class="text-[11px] text-white/60 block mb-1">Amount in Coins (Min 500)</label>
-                        <input id="withdraw-amount" type="number" placeholder="500" class="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#8B5CF6]">
+                        <label class="text-[11px] text-white/60 block mb-1">Amount in Coins (Min 10,000)</label>
+                        <input id="withdraw-amount" type="number" placeholder="10000" class="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#8B5CF6]">
                     </div>
                     <button onclick="submitWithdrawRequest()" class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold text-xs shadow-lg shadow-pink-500/25 hover:opacity-95 transition-all mt-2 cursor-pointer">Request Withdrawal</button>
                 </div>
@@ -262,14 +239,14 @@
         <div id="tab-profile" class="space-y-4 tab-content hidden">
             <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-5 text-center space-y-3">
                 <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#8B5CF6] to-[#22D3EE] p-[2px] mx-auto">
-                    <div class="w-full h-full bg-[#09090B] rounded-[14px] flex items-center justify-center text-2xl">💎</div>
+                    <div id="profile-avatar" class="w-full h-full bg-[#09090B] rounded-[14px] flex items-center justify-center text-2xl font-black text-white">EU</div>
                 </div>
                 <div>
-                    <h3 class="text-sm font-extrabold text-white">Earnify User</h3>
-                    <span class="text-xs text-white/50">Telegram ID: #88392011</span>
+                    <h3 id="profile-name" class="text-sm font-extrabold text-white">Telegram User</h3>
+                    <span id="profile-id" class="text-xs text-white/50">Telegram ID: #000000</span>
                 </div>
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-bold">
-                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Elite Tier 1 Member
+                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Earnify 2026 Verified Member
                 </div>
             </div>
             <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] overflow-hidden divide-y divide-white/[0.04]">
@@ -287,10 +264,10 @@
                     </div>
                     <i data-lucide="chevron-right" class="w-4 h-4 text-white/30"></i>
                 </div>
-                <div onclick="triggerToast('Viewing Elite 2026 Terms & Privacy.', 'success')" class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] cursor-pointer transition-all">
+                <div onclick="triggerToast('Viewing Earnify 2026 Terms & Privacy.', 'success')" class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] cursor-pointer transition-all">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-xl bg-white/[0.04] flex items-center justify-center"><i data-lucide="file-text" class="w-4 h-4 text-[#8B5CF6]"></i></div>
-                        <div><h4 class="text-xs font-bold text-white">Terms & Privacy Policy</h4><span class="text-[10px] text-white/40">Elite 2026 Guidelines</span></div>
+                        <div><h4 class="text-xs font-bold text-white">Terms & Privacy Policy</h4><span class="text-[10px] text-white/40">Earnify 2026 Guidelines</span></div>
                     </div>
                     <i data-lucide="chevron-right" class="w-4 h-4 text-white/30"></i>
                 </div>
@@ -299,7 +276,7 @@
 
     </main>
 
-    <!-- Fixed Bottom Navigation (4 Items without Referral) -->
+    <!-- Fixed Bottom Navigation -->
     <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#09090B]/90 backdrop-blur-2xl border-t border-white/[0.06] max-w-md mx-auto h-16 flex items-center justify-around px-2">
         <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center justify-center flex-1 h-full transition-all relative text-[#22D3EE] cursor-pointer">
             <div class="absolute top-0 w-8 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] rounded-b-full shadow-[0_0_12px_#22D3EE] indicator"></div>
@@ -334,28 +311,54 @@
         <span id="toast-message">Notification message</span>
     </div>
 
-    <!-- JavaScript Application Logic with Provided SDK and Google Sheets Logging -->
+    <!-- JavaScript Application Logic -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // App State
-        let balance = 1450.00;
-        let tasksDoneCount = 42;
+        // Real Live App State (Balance set strictly to 0)
+        let balance = 0.00;
+        let totalEarned = 0.00;
+        let todayEarnings = 0.00;
+        let tasksDoneCount = 0;
+        let streakCount = 0;
         let selectedGateway = 'bKash';
 
         // Google Sheets Web App Endpoint URL provided
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzySmHo2jySTFKHl9uY0Lv2PO2C_TmPArsX5QI4MHABzSD9CfdNoAkol12M0luWp_TVEg/exec';
 
-        // Telegram WebApp Initialization Hook
+        // Telegram WebApp Integration & Real User Data Fetching
         window.addEventListener('DOMContentLoaded', () => {
             if (window.Telegram?.WebApp) {
                 const tg = window.Telegram.WebApp;
                 tg.expand();
                 tg.ready();
+
+                // Fetch Real Telegram User Profile Data
+                const user = tg.initDataUnsafe?.user;
+                if (user) {
+                    const fullName = [user.first_name, user.last_name].filter(Boolean).join(' ') || 'Telegram User';
+                    const userId = '#' + user.id;
+                    const initials = user.first_name ? user.first_name.charAt(0).toUpperCase() : 'U';
+
+                    document.getElementById('header-username').innerText = fullName;
+                    document.getElementById('profile-name').innerText = fullName;
+                    document.getElementById('profile-id').innerText = 'Telegram ID: ' + userId;
+                    document.getElementById('profile-avatar').innerText = initials;
+
+                    // Automatically pre-fill withdraw name with real Telegram name
+                    document.getElementById('withdraw-name').value = fullName;
+                } else {
+                    document.getElementById('header-username').innerText = 'Earnify Member';
+                    document.getElementById('profile-name').innerText = 'Earnify Member';
+                    document.getElementById('profile-id').innerText = 'Telegram ID: #88392011';
+                }
             }
 
-            // Initialize In-App Interstitial Ad configuration
+            // Random Global Rank Generation
+            const randomRank = Math.floor(Math.random() * (550 - 120 + 1)) + 120;
+            document.getElementById('stat-global-rank').innerText = '#' + randomRank;
+
             initInAppAds();
             updateBalanceUI();
         });
@@ -388,15 +391,21 @@
             }, 3500);
         }
 
-        // Update UI Balances and Task Counters
+        // Update UI Balances and Real Counters
         function updateBalanceUI() {
             const formatted = '🪙 ' + balance.toLocaleString('en-US', { minimumFractionDigits: 2 });
-            const bdtVal = '≈ ৳' + ((balance / 1000) * 10).toFixed(2) + ' BDT';
+            const bdtVal = '≈ ৳' + ((balance / 10000) * 100).toFixed(2) + ' BDT';
             
             document.getElementById('main-balance').innerText = formatted;
             document.getElementById('wallet-balance').innerText = formatted;
             document.getElementById('wallet-bdt').innerText = bdtVal;
-            document.getElementById('stat-tasks-done').innerText = tasksDoneCount + ' / 50';
+            document.getElementById('stat-today-earnings').innerText = '+' + todayEarnings.toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' Coins';
+            document.getElementById('stat-streak').innerText = '🔥 ' + streakCount + ' Days Active';
+            document.getElementById('stat-tasks-done').innerText = tasksDoneCount;
+            document.getElementById('wallet-total-earned').innerText = 'Total Earned (' + totalEarned.toLocaleString('en-US') + ' Coins)';
+            
+            const progressPercent = Math.min(100, (tasksDoneCount / 100) * 100);
+            document.getElementById('task-progress-bar').style.width = progressPercent + '%';
         }
 
         // Task Category Filter
@@ -420,12 +429,12 @@
             }
         }
 
-        // Submit Withdrawal Request and Log to Google Sheets
+        // Submit Withdrawal Request with 10,000 Minimum Limit & "Withdraw Request Sent" Toast
         function submitWithdrawRequest() {
             const name = document.getElementById('withdraw-name').value.trim();
             const number = document.getElementById('withdraw-number').value.trim();
             const coins = parseFloat(document.getElementById('withdraw-amount').value);
-            const bdt = ((coins / 1000) * 10).toFixed(2);
+            const bdt = ((coins / 10000) * 100).toFixed(2);
 
             if (!name) {
                 triggerToast('Please enter account holder name.', 'error');
@@ -435,8 +444,8 @@
                 triggerToast('Please enter a valid mobile number.', 'error');
                 return;
             }
-            if (isNaN(coins) || coins < 500) {
-                triggerToast('Minimum withdrawal amount is 500 coins.', 'error');
+            if (isNaN(coins) || coins < 10000) {
+                triggerToast('Minimum withdrawal amount is 10,000 coins.', 'error');
                 return;
             }
             if (coins > balance) {
@@ -446,17 +455,16 @@
 
             // Deduct balance and update state
             balance -= coins;
-            tasksDoneCount = Math.min(50, tasksDoneCount + 1);
+            tasksDoneCount += 1;
             updateBalanceUI();
 
             // Clear inputs
-            document.getElementById('withdraw-name').value = '';
             document.getElementById('withdraw-number').value = '';
             document.getElementById('withdraw-amount').value = '';
 
-            triggerToast(`Request submitted via ${selectedGateway}! Logging data...`, 'success');
+            // Exact requested confirmation message
+            triggerToast('Withdraw Request Sent', 'success');
 
-            // Send payload to Google Sheets Web App Endpoint
             const payload = {
                 name: name,
                 gateway: selectedGateway,
@@ -468,27 +476,33 @@
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
                 body: JSON.stringify(payload)
             }).then(() => {
-                triggerToast('Successfully recorded to Google Sheet!', 'success');
+                console.log('Recorded to Google Sheet successfully');
             }).catch(error => {
-                console.log('Sheet logging notice:', error);
+                console.log('Sheet sync error:', error);
             });
         }
 
         // ==========================================
-        // OFFICIAL SDK INTEGRATION FUNCTIONS
+        // OFFICIAL SDK INTEGRATION & REWARD FUNCTIONS
         // ==========================================
 
-        // Rewarded Interstitial wrapper using the provided SDK function `show_11383840`
-        function playRewardedAd(rewardAmount, successMessage) {
+        // 1. Daily Check-in (Rewarded Interstitial)
+        function playDailyCheckIn() {
             if (typeof show_11383840 === 'function') {
                 show_11383840().then(() => {
-                    balance += rewardAmount;
-                    tasksDoneCount = Math.min(50, tasksDoneCount + 1);
+                    balance += 50;
+                    totalEarned += 50;
+                    todayEarnings += 50;
+                    if (streakCount === 0) streakCount = 1;
+                    tasksDoneCount += 1;
                     updateBalanceUI();
-                    triggerToast(successMessage);
+                    alert('You have seen an ad!');
+                    triggerToast('Daily Check-In Completed! +50 Coins');
                 }).catch(e => {
                     triggerToast('Ad playback error. Try again.', 'error');
                 });
@@ -497,23 +511,63 @@
             }
         }
 
-        // Rewarded Popup wrapper
-        function playPopupAd(rewardAmount, successMessage) {
+        // 2. Watch Ads (Rewarded Interstitial)
+        function playWatchAds() {
+            if (typeof show_11383840 === 'function') {
+                show_11383840().then(() => {
+                    balance += 100;
+                    totalEarned += 100;
+                    todayEarnings += 100;
+                    tasksDoneCount += 1;
+                    updateBalanceUI();
+                    alert('You have seen an ad!');
+                    triggerToast('Ad Stream Completed! +100 Coins');
+                }).catch(e => {
+                    triggerToast('Ad playback error. Try again.', 'error');
+                });
+            } else {
+                triggerToast('Ad SDK loading... Please wait a second.', 'error');
+            }
+        }
+
+        // 3. Spin Wheel (Rewarded Popup)
+        function playSpinWheel() {
             if (typeof show_11383840 === 'function') {
                 show_11383840('pop').then(() => {
-                    balance += rewardAmount;
-                    tasksDoneCount = Math.min(50, tasksDoneCount + 1);
+                    balance += 100;
+                    totalEarned += 100;
+                    todayEarnings += 100;
+                    tasksDoneCount += 1;
                     updateBalanceUI();
-                    triggerToast(successMessage);
+                    triggerToast('Lucky Spin Rewarded! +100 Coins');
                 }).catch(e => {
-                    triggerToast('Popup ad error. Try again.', 'error');
+                    // user get error during playing ad
                 });
             } else {
                 triggerToast('Ad SDK loading...', 'error');
             }
         }
 
-        // In-App Interstitial configuration
+        // 4. Mystery Box Reward (Rewarded Interstitial)
+        function playMysteryBox() {
+            if (typeof show_11383840 === 'function') {
+                show_11383840().then(() => {
+                    balance += 250;
+                    totalEarned += 250;
+                    todayEarnings += 250;
+                    tasksDoneCount += 1;
+                    updateBalanceUI();
+                    alert('You have seen an ad!');
+                    triggerToast('Mystery Box Unlocked! +250 Coins');
+                }).catch(e => {
+                    triggerToast('Ad playback error. Try again.', 'error');
+                });
+            } else {
+                triggerToast('Ad SDK loading...', 'error');
+            }
+        }
+
+        // 5. In-App Interstitial Configuration
         function initInAppAds() {
             try {
                 if (typeof show_11383840 === 'function') {
