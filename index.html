@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Earnify 2026 - Elite Edition</title>
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Monetag Official In-App Interstitial Script -->
+    <script>
+      try {
+          show_11383840({
+            type: 'inApp',
+            inAppSettings: {
+              frequency: 2,
+              capping: 0.1,
+              interval: 30,
+              timeout: 5,
+              everyPage: false
+            }
+          });
+      } catch(e) {
+          console.log("Interstitial info:", e);
+      }
+    </script>
+    
+    <!-- Monetag Official Rewarded and Popup Tag Library Script -->
+    <script src="https://alwingulla.com/88/tag.min.js" data-zone="11383840" async data-cfasync="false"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Embedded Elite Ultra-Premium CSS Styling -->
+    <style>
+        :root {
+            --bg-base: #020617;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --border-glass: rgba(255, 255, 255, 0.07);
+            --border-glow: rgba(139, 92, 246, 0.5);
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+            --shadow-card: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Lock Body & Html to Prevent Any Scrolling */
+        html, body {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            position: fixed;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                linear-gradient(to bottom, #030712, var(--bg-base));
+        }
+
+        /* Ultra Header Styling */
+        .app-header {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .user-profile-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-container {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.35);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fallback-avatar {
+            font-size: 1.1rem;
+        }
+
+        .user-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .badge-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .app-badge {
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: var(--accent-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .status-indicator {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-emerald);
+        }
+
+        .username {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #fff;
+            max-width: 140px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .wallet-pill {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            padding: 6px 14px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+        }
+
+        .coin-amount {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--accent-amber);
+            letter-spacing: 0.3px;
+        }
+
+        /* Layout Container */
+        .app-container {
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+            height: calc(100vh - 67px);
+            height: calc(100dvh - 67px);
+            justify-content: space-between;
+        }
+
+        /* Ad Box Container */
+        .ad-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ad-banner-box {
+            width: 320px;
+            height: 50px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Glass Cards */
+        .dashboard-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        }
+
+        .card-heading {
+            margin-bottom: 12px;
+        }
+
+        .card-heading h2 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .sub-text {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Action Grid Layout */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .action-tile {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7));
+            border: 1px solid var(--border-glass);
+            padding: 12px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .full-width-tile {
+            grid-column: span 2;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(15, 23, 42, 0.8));
+            border-color: rgba(139, 92, 246, 0.25);
+            padding: 10px;
+        }
+
+        .full-width-tile .tile-content {
+            align-items: center;
+        }
+
+        .action-tile:hover {
+            border-color: var(--border-glow);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(15, 23, 42, 0.9));
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .action-tile:active {
+            transform: scale(0.97);
+        }
+
+        .tile-icon-box {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .tile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .tile-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .tile-reward {
+            font-size: 0.68rem;
+            color: var(--accent-amber);
+            font-weight: 800;
+        }
+
+        /* --- Elite Express Payout Styling --- */
+        .payout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gateway-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .gateway-option {
+            background: rgba(2, 6, 23, 0.6);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .gateway-option:hover {
+            background: rgba(2, 6, 23, 0.9);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .gateway-option.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.15));
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+        }
+
+        .gateway-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        /* Specific Brand Accent Badges */
+        .gateway-option[data-value="bKash"] .gateway-icon {
+            background: rgba(225, 29, 72, 0.15);
+            color: #fb7185;
+            border: 1px solid rgba(225, 29, 72, 0.3);
+        }
+        .gateway-option[data-value="Nagad"] .gateway-icon {
+            background: rgba(234, 88, 12, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(234, 88, 12, 0.3);
+        }
+        .gateway-option[data-value="Rocket"] .gateway-icon {
+            background: rgba(147, 51, 234, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+
+        .gateway-name {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .input-group-elite {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-prefix-icon {
+            position: absolute;
+            left: 14px;
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        .styled-input {
+            width: 100%;
+            padding: 12px 14px 12px 42px;
+            background: rgba(2, 6, 23, 0.75);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .styled-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+            background: rgba(2, 6, 23, 0.95);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-emerald), #059669);
+            color: #fff;
+            border: none;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+            transition: var(--transition-smooth);
+        }
+
+        .cta-button:hover {
+            opacity: 0.95;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .btn-arrow {
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .cta-button:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* Toast Notifications */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Professional App Header -->
+    <header class="app-header">
+        <div class="user-profile-section">
+            <div class="avatar-container" id="logoWrapper">
+                <img id="tgUserPhoto" src="" alt="Profile" style="display:none;">
+                <div class="fallback-avatar" id="fallbackLogo">💎</div>
+            </div>
+            <div class="user-meta">
+                <div class="badge-wrapper">
+                    <span class="app-badge">Earnify 2026</span>
+                    <span class="status-indicator"></span>
+                </div>
+                <h1 class="username" id="userName">Authenticating...</h1>
+            </div>
+        </div>
+        <div class="wallet-pill">
+            <span class="coin-icon">🪙</span>
+            <span class="coin-amount" id="balance">500</span>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="app-container">
+        
+        <!-- Strict 320x50 Banner Ad Section with Auto-Reload -->
+        <section class="ad-wrapper">
+            <div class="ad-banner-box" id="bannerContainer">
+                <!-- Banner ad script will be dynamically injected here every 30s -->
+            </div>
+        </section>
+
+        <!-- Earning Hub Card -->
+        <section class="dashboard-card">
+            <div class="card-heading">
+                <h2>🚀 Elite Earning Hub</h2>
+                <span class="sub-text">Complete protocol streams to boost balance</span>
+            </div>
+            <div class="action-grid">
+                <div class="action-tile" onclick="claimDailyBonus()">
+                    <div class="tile-icon-box">🎁</div>
+                    <div class="tile-content">
+                        <div class="tile-title">Daily Check-in</div>
+                        <div class="tile-reward">+50 Coins</div>
+                    </div>
+                </div>
+                <!-- Rewarded Interstitial Integration -->
+                <div class="action-tile" onclick="watchRewardedAd()">
+                    <div class="tile-icon-box">📺</div>
+                    <div class="tile-content">
+                        <div class="tile-title">Watch Video Ad</div>
+                        <div class="tile-reward">+50 Coins</div>
+                    </div>
+                </div>
+                <!-- Rewarded Popup Integration -->
+                <div class="action-tile full-width-tile" onclick="triggerPopupAd()">
+                    <div class="tile-icon-box">💥</div>
+                    <div class="tile-content">
+                        <div class="tile-title" style="text-align: center;">Popup Bonus Stream</div>
+                        <div class="tile-reward">+50 Coins Instant</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elite Express Payout Card -->
+        <section class="dashboard-card">
+            <div class="card-heading">
+                <h2>💸 Express Payout Gateway</h2>
+                <span class="sub-text">Min threshold: 100 Coins (Test Mode)</span>
+            </div>
+            <div class="payout-form">
+                <!-- Premium Gateway Visual Selector -->
+                <div class="gateway-selector-grid">
+                    <div class="gateway-option active" data-value="bKash" onclick="selectGateway('bKash')">
+                        <div class="gateway-icon">৳</div>
+                        <span class="gateway-name">bKash</span>
+                    </div>
+                    <div class="gateway-option" data-value="Nagad" onclick="selectGateway('Nagad')">
+                        <div class="gateway-icon">₦</div>
+                        <span class="gateway-name">Nagad</span>
+                    </div>
+                    <div class="gateway-option" data-value="Rocket" onclick="selectGateway('Rocket')">
+                        <div class="gateway-icon">®</div>
+                        <span class="gateway-name">Rocket</span>
+                    </div>
+                </div>
+
+                <!-- Hidden Input to store selected gateway -->
+                <input type="hidden" id="paymentMethod" value="bKash">
+
+                <div class="input-group-elite">
+                    <span class="input-prefix-icon">📱</span>
+                    <input type="tel" id="accountNumber" class="styled-input" placeholder="Enter 11-digit mobile number" maxlength="11">
+                </div>
+
+                <button class="cta-button" onclick="requestWithdraw()">
+                    <span>Initialize Payout Request</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notification System -->
+    <div class="toast-notification" id="toastMsg">
+        <span id="toastText">System operational</span>
+    </div>
+
+    <!-- Embedded JavaScript Logic -->
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        let userProfile = {
+            totalCoins: 500,
+            displayName: "Authorized User",
+            avatarUrl: null,
+            lastCheckInDate: null
+        };
+
+        const balanceDisplay = document.getElementById('balance');
+        const userNameDisplay = document.getElementById('userName');
+        const userPhotoElement = document.getElementById('tgUserPhoto');
+        const fallbackAvatarElement = document.getElementById('fallbackLogo');
+        const toastPopup = document.getElementById('toastMsg');
+        const toastText = document.getElementById('toastText');
+
+        function initializeAppEnvironment() {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                let telegramUser = tg.initDataUnsafe.user;
+                let firstName = telegramUser.first_name || "";
+                let lastName = telegramUser.last_name || "";
+                userProfile.displayName = (firstName + " " + lastName).trim() || "Telegram User";
+                
+                if (telegramUser.photo_url) {
+                    userProfile.avatarUrl = telegramUser.photo_url;
+                    userPhotoElement.src = userProfile.avatarUrl;
+                    userPhotoElement.style.display = 'block';
+                    fallbackAvatarElement.style.display = 'none';
+                }
+            } else {
+                userProfile.displayName = "Elite Operator";
+            }
+
+            userNameDisplay.innerText = userProfile.displayName;
+            syncBalanceUI();
+
+            // Initial Banner Ad Load
+            loadBannerAd();
+
+            // Setup 30 Seconds Banner Ad Auto-Reload Timer
+            setInterval(() => {
+                loadBannerAd();
+            }, 30000);
+
+            setTimeout(() => {
+                triggerAutoAdLoop();
+            }, 3000);
+
+            setInterval(() => {
+                triggerAutoAdLoop();
+            }, 60000);
+        }
+
+        // Function to reload banner ad every 30 seconds
+        function loadBannerAd() {
+            let container = document.getElementById('bannerContainer');
+            container.innerHTML = ''; // Clear old ad
+
+            window.atOptions = {
+                'key' : 'efdafd803dbe93aaaf560ba27ed8a8d8',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+
+            let scriptTag = document.createElement('script');
+            scriptTag.src = "https://cardinaltangible.com/efdafd803dbe93aaaf560ba27ed8a8d8/invoke.js";
+            container.appendChild(scriptTag);
+        }
+
+        // Interactive Gateway Selector Function
+        window.selectGateway = function(gatewayName) {
+            document.querySelectorAll('.gateway-option').forEach(el => {
+                el.classList.remove('active');
+            });
+            let selectedEl = document.querySelector(`.gateway-option[data-value="${gatewayName}"]`);
+            if (selectedEl) {
+                selectedEl.classList.add('active');
+            }
+            document.getElementById('paymentMethod').value = gatewayName;
+        };
+
+        // Automatic Background Ad Trigger Function (+50 Coins) using code (11383840)[cite: 1]
+        function triggerAutoAdLoop() {
+            if (typeof show_11383840 === 'function') {
+                show_11383840().then(() => {
+                    userProfile.totalCoins += 50;
+                    syncBalanceUI();
+                    showToastNotification('⚡ Auto session ad verified! +50 Coins added.');
+                }).catch(e => {
+                    console.log("Auto ad background info:", e);
+                });
+            }
+        }
+
+        function syncBalanceUI() {
+            balanceDisplay.innerText = userProfile.totalCoins;
+        }
+
+        function showToastNotification(message, isError = false) {
+            toastText.innerText = message;
+            toastPopup.style.borderColor = isError ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)';
+            toastPopup.classList.add('show');
+            setTimeout(() => { toastPopup.classList.remove('show'); }, 3000);
+        }
+
+        // Daily Bonus (+50 Coins)
+        window.claimDailyBonus = function() {
+            let currentDateString = new Date().toDateString();
+            if (userProfile.lastCheckInDate === currentDateString) {
+                showToastNotification("Daily protocol reward already claimed today.", true);
+                return;
+            }
+            userProfile.totalCoins += 50;
+            userProfile.lastCheckInDate = currentDateString;
+            syncBalanceUI();
+            showToastNotification("🎉 Protocol Success! +50 Coins credited.");
+        };
+
+        // Rewarded Interstitial Implementation (+50 Coins) using code (11383840)[cite: 1]
+        window.watchRewardedAd = function() {
+            if (typeof show_11383840 === 'function') {
+                show_11383840().then(() => {
+                    // You need to add your user reward function here, which will be executed after the user watches the ad.[cite: 1]
+                    userProfile.totalCoins += 50;
+                    syncBalanceUI();
+                    showToastNotification('🎉 You have seen an ad! +50 Coins added.');[cite: 1]
+                }).catch(e => {
+                    showToastNotification('Ad playback error or closed early.', true);
+                });
+            } else {
+                showToastNotification('📺 Loading interactive stream...');
+                setTimeout(() => {
+                    userProfile.totalCoins += 50;
+                    syncBalanceUI();
+                    showToastNotification('🎉 Stream completed! +50 Coins credited.');
+                }, 1200);
+            }
+        };
+
+        // Rewarded Popup Implementation (+50 Coins) using code (11383840)[cite: 1]
+        window.triggerPopupAd = function() {
+            if (typeof show_11383840 === 'function') {
+                show_11383840('pop').then(() => {
+                    // user watch ad till the end or close it in interstitial format[cite: 1]
+                    // your code to reward user for rewarded format[cite: 1]
+                    userProfile.totalCoins += 50;
+                    syncBalanceUI();
+                    showToastNotification('💥 Popup bonus secured! +50 Coins added.');
+                }).catch(e => {
+                    // user get error during playing ad[cite: 1]
+                    // do nothing or whatever you want[cite: 1]
+                    console.log("Popup ad closed or error:", e);
+                });
+            } else {
+                showToastNotification('💥 Initializing secondary stream...');
+                setTimeout(() => {
+                    userProfile.totalCoins += 50;
+                    syncBalanceUI();
+                    showToastNotification('💥 Bonus unlocked! +50 Coins credited.');
+                }, 1200);
+            }
+        };
+
+        // Withdraw Request & Google Sheets Integration (Minimum 100 Coins)
+        window.requestWithdraw = function() {
+            let chosenGateway = document.getElementById('paymentMethod').value;
+            let destinationAccount = document.getElementById('accountNumber').value.trim();
+
+            if (destinationAccount.length < 11 || !/^\d+$/.test(destinationAccount)) {
+                showToastNotification("Error: Enter a valid 11-digit mobile destination account.", true);
+                return;
+            }
+
+            if (userProfile.totalCoins < 100) {
+                showToastNotification("Insufficient balance! Minimum 100 Coins required.", true);
+                return;
+            }
+
+            // Google Apps Script Web App URL (আপনার তৈরি করা Web App URL এখানে বসাবেন)
+            let scriptURL = 'https://script.google.com/macros/s/AKfycbzySmHo2jySTFKHl9uY0Lv2PO2C_TmPArsX5QI4MHABzSD9CfdNoAkol12M0luWp_TVEg/exec';
+
+            let payload = {
+                name: userProfile.displayName,
+                gateway: chosenGateway,
+                number: destinationAccount,
+                coins: 100
+            };
+
+            // Google Sheets এ ডাটা পাঠানোর ফেচ রিকোয়েস্ট
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                userProfile.totalCoins -= 100;
+                syncBalanceUI();
+                document.getElementById('accountNumber').value = '';
+                showToastNotification(`🚀 Payout Request Submitted! ${userProfile.displayName} - ${chosenGateway}: ${destinationAccount}`);
+            }).catch(error => {
+                showToastNotification("Connection error! Try again.", true);
+            });
+        };
+
+        initializeAppEnvironment();
+    </script>
+</body>
+</html>
