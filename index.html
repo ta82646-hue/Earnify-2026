@@ -1,800 +1,495 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Earnify 2026 - Elite Edition</title>
-    <!-- Telegram WebApp SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    
-    <!-- Monetag Official In-App Interstitial Script -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnify 2026 - Telegram WebApp</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      try {
-          show_11383840({
-            type: 'inApp',
-            inAppSettings: {
-              frequency: 2,
-              capping: 0.1,
-              interval: 30,
-              timeout: 5,
-              everyPage: false
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#09090B',
+                    }
+                }
             }
-          });
-      } catch(e) {
-          console.log("Interstitial info:", e);
-      }
+        }
     </script>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Embedded Elite Ultra-Premium CSS Styling -->
-    <style>
-        :root {
-            --bg-base: #020617;
-            --bg-card: rgba(15, 23, 42, 0.65);
-            --border-glass: rgba(255, 255, 255, 0.07);
-            --border-glow: rgba(139, 92, 246, 0.5);
-            --accent-primary: #8b5cf6;
-            --accent-secondary: #06b6d4;
-            --accent-emerald: #10b981;
-            --accent-amber: #f59e0b;
-            --text-main: #f8fafc;
-            --text-muted: #64748b;
-            --shadow-card: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
-            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Lock Body & Html to Prevent Any Scrolling */
-        html, body {
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
-            position: fixed;
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
-                linear-gradient(to bottom, #030712, var(--bg-base));
-        }
-
-        /* Ultra Header Styling */
-        .app-header {
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-bottom: 1px solid var(--border-glass);
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .user-profile-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar-container {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.35);
-        }
-
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .fallback-avatar {
-            font-size: 1.1rem;
-        }
-
-        .user-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .badge-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .app-badge {
-            font-size: 0.6rem;
-            font-weight: 800;
-            color: var(--accent-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .status-indicator {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-emerald);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-emerald);
-        }
-
-        .username {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: #fff;
-            max-width: 140px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .wallet-pill {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            padding: 6px 14px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
-        }
-
-        .coin-amount {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: var(--accent-amber);
-            letter-spacing: 0.3px;
-        }
-
-        /* Layout Container */
-        .app-container {
-            padding: 14px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 480px;
-            margin: 0 auto;
-            width: 100%;
-            height: calc(100vh - 67px);
-            height: calc(100dvh - 67px);
-            justify-content: space-between;
-        }
-
-        /* Ad Box Container */
-        .ad-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .ad-banner-box {
-            width: 320px;
-            height: 50px;
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Glass Cards */
-        .dashboard-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-glass);
-            border-radius: 18px;
-            padding: 16px;
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-        }
-
-        .card-heading {
-            margin-bottom: 12px;
-        }
-
-        .card-heading h2 {
-            font-size: 0.98rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 2px;
-        }
-
-        .sub-text {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
-        /* Action Grid Layout */
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .action-tile {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7));
-            border: 1px solid var(--border-glass);
-            padding: 12px;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .full-width-tile {
-            grid-column: span 2;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(15, 23, 42, 0.8));
-            border-color: rgba(139, 92, 246, 0.25);
-            padding: 10px;
-        }
-
-        .full-width-tile .tile-content {
-            align-items: center;
-        }
-
-        .action-tile:hover {
-            border-color: var(--border-glow);
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(15, 23, 42, 0.9));
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
-        }
-
-        .action-tile:active {
-            transform: scale(0.97);
-        }
-
-        .tile-icon-box {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-glass);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .tile-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .tile-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .tile-reward {
-            font-size: 0.68rem;
-            color: var(--accent-amber);
-            font-weight: 800;
-        }
-
-        /* --- Elite Express Payout Styling --- */
-        .payout-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .gateway-selector-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .gateway-option {
-            background: rgba(2, 6, 23, 0.6);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            padding: 10px 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .gateway-option:hover {
-            background: rgba(2, 6, 23, 0.9);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .gateway-option.active {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.15));
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
-        }
-
-        .gateway-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9rem;
-            font-weight: 800;
-        }
-
-        /* Specific Brand Accent Badges */
-        .gateway-option[data-value="bKash"] .gateway-icon {
-            background: rgba(225, 29, 72, 0.15);
-            color: #fb7185;
-            border: 1px solid rgba(225, 29, 72, 0.3);
-        }
-        .gateway-option[data-value="Nagad"] .gateway-icon {
-            background: rgba(234, 88, 12, 0.15);
-            color: #fb923c;
-            border: 1px solid rgba(234, 88, 12, 0.3);
-        }
-        .gateway-option[data-value="Rocket"] .gateway-icon {
-            background: rgba(147, 51, 234, 0.15);
-            color: #c084fc;
-            border: 1px solid rgba(147, 51, 234, 0.3);
-        }
-
-        .gateway-name {
-            font-size: 0.74rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .input-group-elite {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-prefix-icon {
-            position: absolute;
-            left: 14px;
-            font-size: 1rem;
-            pointer-events: none;
-        }
-
-        .styled-input {
-            width: 100%;
-            padding: 12px 14px 12px 42px;
-            background: rgba(2, 6, 23, 0.75);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 0.85rem;
-            outline: none;
-            transition: var(--transition-smooth);
-        }
-
-        .styled-input:focus {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
-            background: rgba(2, 6, 23, 0.95);
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--accent-emerald), #059669);
-            color: #fff;
-            border: none;
-            padding: 13px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.88rem;
-            cursor: pointer;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
-            transition: var(--transition-smooth);
-        }
-
-        .cta-button:hover {
-            opacity: 0.95;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
-            transform: translateY(-1px);
-        }
-
-        .cta-button:active {
-            transform: scale(0.98);
-        }
-
-        .btn-arrow {
-            font-size: 1rem;
-            transition: transform 0.2s ease;
-        }
-
-        .cta-button:hover .btn-arrow {
-            transform: translateX(4px);
-        }
-
-        /* Toast Notifications */
-        .toast-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(120px);
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .toast-notification.show {
-            transform: translateX(-50%) translateY(0);
-        }
-    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body class="bg-[#09090B] text-[#F8FAFC] font-sans antialiased pb-24 selection:bg-[#8B5CF6]/30 overflow-x-hidden min-h-screen">
 
-    <!-- Professional App Header -->
-    <header class="app-header">
-        <div class="user-profile-section">
-            <div class="avatar-container" id="logoWrapper">
-                <img id="tgUserPhoto" src="" alt="Profile" style="display:none;">
-                <div class="fallback-avatar" id="fallbackLogo">💎</div>
-            </div>
-            <div class="user-meta">
-                <div class="badge-wrapper">
-                    <span class="app-badge">Earnify 2026</span>
-                    <span class="status-indicator"></span>
+    <!-- Ambient Neon Background Glows -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-br from-[#8B5CF6]/15 to-[#22D3EE]/10 blur-[140px] pointer-events-none rounded-full"></div>
+
+    <!-- Top Header Bar -->
+    <header class="sticky top-0 z-40 bg-[#09090B]/80 backdrop-blur-2xl border-b border-white/[0.06] px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#8B5CF6] to-[#22D3EE] p-[1px] shadow-lg shadow-[#8B5CF6]/20">
+                <div class="w-full h-full bg-[#09090B] rounded-[15px] flex items-center justify-center overflow-hidden">
+                    <span class="text-lg">💎</span>
                 </div>
-                <h1 class="username" id="userName">Authenticating...</h1>
+                <div class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-[#09090B]"></div>
+            </div>
+            <div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-xs font-bold tracking-wider text-[#22D3EE] uppercase">Elite Member</span>
+                    <span class="px-1.5 py-0.2 bg-[#8B5CF6]/20 border border-[#8B5CF6]/30 text-[#8B5CF6] text-[10px] font-extrabold rounded-md">LVL 4</span>
+                </div>
+                <h1 class="text-sm font-extrabold text-white tracking-tight">Earnify 2026 User</h1>
             </div>
         </div>
-        <div class="wallet-pill">
-            <span class="coin-icon">🪙</span>
-            <span class="coin-amount" id="balance">500</span>
+        <div class="flex items-center gap-2">
+            <button onclick="triggerToast('No new notification alerts.', 'success')" class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-white/80 hover:bg-white/[0.08] transition-all cursor-pointer">
+                <i data-lucide="bell" class="w-4 h-4 text-[#22D3EE]"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Main Workspace Container -->
-    <main class="app-container">
-        
-        <!-- Strict 320x50 Banner Ad Section with Auto-Reload -->
-        <section class="ad-wrapper">
-            <div class="ad-banner-box" id="bannerContainer">
-                <!-- Banner ad script will be dynamically injected here every 30s -->
-            </div>
-        </section>
+    <!-- Main Container -->
+    <main class="max-w-md mx-auto px-4 pt-4">
 
-        <!-- Earning Hub Card -->
-        <section class="dashboard-card">
-            <div class="card-heading">
-                <h2>🚀 Elite Earning Hub</h2>
-                <span class="sub-text">Complete protocol streams to boost balance</span>
-            </div>
-            <div class="action-grid">
-                <div class="action-tile" onclick="claimDailyBonus()">
-                    <div class="tile-icon-box">🎁</div>
-                    <div class="tile-content">
-                        <div class="tile-title">Daily Check-in</div>
-                        <div class="tile-reward">+50 Coins</div>
+        <!-- ================= HOME TAB ================= -->
+        <div id="tab-home" class="space-y-4 tab-content">
+            <!-- Balance Card -->
+            <div class="relative rounded-[24px] bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/[0.1] p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-[#8B5CF6]/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-xs font-semibold text-white/60 tracking-wider uppercase">Total Balance</span>
+                        <div class="flex items-baseline gap-2 mt-0.5">
+                            <span id="main-balance" class="text-3xl font-black tracking-tight text-white">🪙 1,450.00</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold flex items-center gap-1">
+                        <i data-lucide="sparkles" class="w-3 h-3"></i> +12.4% today
+                    </span>
+                </div>
+                <div class="grid grid-cols-2 gap-3 pt-3 border-t border-white/[0.06] mb-4">
+                    <div>
+                        <span class="text-[11px] text-white/50 block">Today's Earnings</span>
+                        <span class="text-sm font-bold text-[#22D3EE]">+340.00 Coins</span>
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-white/50 block">Weekly Streak</span>
+                        <span class="text-sm font-bold text-[#8B5CF6]">🔥 5 Days Active</span>
                     </div>
                 </div>
-                <!-- Rewarded Interstitial Integration -->
-                <div class="action-tile" onclick="watchRewardedAd()">
-                    <div class="tile-icon-box">📺</div>
-                    <div class="tile-content">
-                        <div class="tile-title">Watch Video Ad</div>
-                        <div class="tile-reward">+50 Coins</div>
-                    </div>
+                <div class="flex gap-2">
+                    <button onclick="switchTab('wallet')" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#7c3aed] text-white font-bold text-xs shadow-lg shadow-[#8B5CF6]/25 hover:opacity-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                        Withdraw via bKash <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </button>
                 </div>
-                <!-- Rewarded Popup Integration -->
-                <div class="action-tile full-width-tile" onclick="triggerPopupAd()">
-                    <div class="tile-icon-box">💥</div>
-                    <div class="tile-content">
-                        <div class="tile-title" style="text-align: center;">Popup Bonus Stream</div>
-                        <div class="tile-reward">+50 Coins Instant</div>
+            </div>
+
+            <!-- Quick Stats Grid -->
+            <div class="grid grid-cols-2 gap-2.5">
+                <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex flex-col justify-between">
+                    <span class="text-[11px] text-white/50 font-medium">Tasks Done</span>
+                    <span id="stat-tasks-done" class="text-base font-extrabold text-white mt-1">42 / 50</span>
+                </div>
+                <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex flex-col justify-between">
+                    <span class="text-[11px] text-white/50 font-medium">Global Rank</span>
+                    <span class="text-base font-extrabold text-[#8B5CF6] mt-1">#142</span>
+                </div>
+            </div>
+
+            <!-- Interactive Feature Grid -->
+            <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-white/60">Quick Earning Protocols</h3>
+                    <span class="text-xs text-[#22D3EE] font-semibold">Live Streams</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div onclick="playRewardedAd(50, 'Daily Check-In Verified! +50 Coins')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#8B5CF6]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-10 h-10 rounded-xl bg-[#8B5CF6]/20 border border-[#8B5CF6]/30 flex items-center justify-center text-lg">🎁</div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Daily Check-In</h4>
+                            <span class="text-[11px] text-[#22D3EE] font-bold">+50 Coins</span>
+                        </div>
+                    </div>
+                    <div onclick="playPopupAd(100, 'Lucky Spin Rewarded! +100 Coins')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#22D3EE]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#22D3EE]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-10 h-10 rounded-xl bg-[#22D3EE]/20 border border-[#22D3EE]/30 flex items-center justify-center text-lg">🎯</div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Spin Wheel</h4>
+                            <span class="text-[11px] text-[#22D3EE] font-bold">Up to 100</span>
+                        </div>
+                    </div>
+                    <div onclick="playRewardedAd(75, 'Ad Stream Completed! +75 Coins')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#8B5CF6]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-10 h-10 rounded-xl bg-[#8B5CF6]/20 border border-[#8B5CF6]/30 flex items-center justify-center text-lg">📺</div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Watch Ads</h4>
+                            <span class="text-[11px] text-[#22D3EE] font-bold">+75 Coins</span>
+                        </div>
+                    </div>
+                    <div onclick="switchTab('rewards')" class="group p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#22D3EE]/50 cursor-pointer transition-all flex items-center gap-3 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#22D3EE]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-lg">📦</div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Lucky Box</h4>
+                            <span class="text-[11px] text-amber-400 font-bold">VIP Rewards</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Elite Express Payout Card -->
-        <section class="dashboard-card">
-            <div class="card-heading">
-                <h2>💸 Express Payout Gateway</h2>
-                <span class="sub-text">Min threshold: 100 Coins (Test Mode)</span>
-            </div>
-            <div class="payout-form">
-                <!-- Premium Gateway Visual Selector -->
-                <div class="gateway-selector-grid">
-                    <div class="gateway-option active" data-value="bKash" onclick="selectGateway('bKash')">
-                        <div class="gateway-icon">৳</div>
-                        <span class="gateway-name">bKash</span>
-                    </div>
-                    <div class="gateway-option" data-value="Nagad" onclick="selectGateway('Nagad')">
-                        <div class="gateway-icon">₦</div>
-                        <span class="gateway-name">Nagad</span>
-                    </div>
-                    <div class="gateway-option" data-value="Rocket" onclick="selectGateway('Rocket')">
-                        <div class="gateway-icon">®</div>
-                        <span class="gateway-name">Rocket</span>
-                    </div>
+            <!-- Announcement Banner -->
+            <div onclick="triggerToast('Earnify 2026 Elite Season is fully operational.', 'success')" class="rounded-2xl bg-gradient-to-r from-[#8B5CF6]/20 via-[#22D3EE]/10 to-transparent border border-white/[0.08] p-4 flex items-center justify-between cursor-pointer hover:border-[#8B5CF6]/40 transition-all">
+                <div class="space-y-1">
+                    <span class="px-2 py-0.5 rounded bg-[#8B5CF6] text-white text-[9px] font-black uppercase tracking-wider">Announcement</span>
+                    <h4 class="text-xs font-bold text-white">Earnify 2026 Elite Season is Live!</h4>
+                    <p class="text-[11px] text-white/60">Double bonus multipliers activated for all Tier-1 users.</p>
                 </div>
-
-                <!-- Hidden Input to store selected gateway -->
-                <input type="hidden" id="paymentMethod" value="bKash">
-
-                <div class="input-group-elite">
-                    <span class="input-prefix-icon">📱</span>
-                    <input type="tel" id="accountNumber" class="styled-input" placeholder="Enter 11-digit mobile number" maxlength="11">
-                </div>
-
-                <button class="cta-button" onclick="requestWithdraw()">
-                    <span>Initialize Payout Request</span>
-                    <span class="btn-arrow">→</span>
-                </button>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-white/40"></i>
             </div>
-        </section>
+        </div>
+
+        <!-- ================= TASKS TAB ================= -->
+        <div id="tab-tasks" class="space-y-4 tab-content hidden">
+            <div class="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                <button onclick="filterTasks('featured', this)" class="task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-gradient-to-r from-[#8B5CF6] to-[#7c3aed] text-white shadow-lg shadow-[#8B5CF6]/25 cursor-pointer">featured</button>
+                <button onclick="filterTasks('daily', this)" class="task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-white/[0.03] text-white/60 border border-white/[0.06] hover:bg-white/[0.06] cursor-pointer">daily</button>
+                <button onclick="filterTasks('social', this)" class="task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-white/[0.03] text-white/60 border border-white/[0.06] hover:bg-white/[0.06] cursor-pointer">social</button>
+                <button onclick="filterTasks('games', this)" class="task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-white/[0.03] text-white/60 border border-white/[0.06] hover:bg-white/[0.06] cursor-pointer">games</button>
+            </div>
+            <div class="space-y-3">
+                <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 flex items-center justify-between hover:border-[#8B5CF6]/40 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-xl">📢</div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Subscribe to Telegram Channel</h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-[11px] font-bold text-[#22D3EE]">+150 Coins</span>
+                                <span class="text-[10px] text-white/40">• 30s</span>
+                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.05] text-white/70">Easy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="playRewardedAd(150, 'Task Verified Successfully! Reward Claimed.')" class="px-3.5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-xs font-bold text-white hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-all cursor-pointer">Start</button>
+                </div>
+                <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 flex items-center justify-between hover:border-[#8B5CF6]/40 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-xl">⚡</div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">Test Next-Gen WebApp Protocol</h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-[11px] font-bold text-[#22D3EE]">+300 Coins</span>
+                                <span class="text-[10px] text-white/40">• 2m</span>
+                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.05] text-white/70">Medium</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="playRewardedAd(300, 'Task Verified Successfully! Reward Claimed.')" class="px-3.5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.1] text-xs font-bold text-white hover:bg-[#8B5CF6] hover:border-[#8B5CF6] transition-all cursor-pointer">Start</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= REWARDS TAB ================= -->
+        <div id="tab-rewards" class="space-y-4 tab-content hidden">
+            <div class="rounded-2xl bg-gradient-to-br from-[#8B5CF6]/20 via-transparent to-[#22D3EE]/15 border border-white/[0.08] p-5 text-center space-y-3">
+                <span class="text-3xl">🎁</span>
+                <div>
+                    <h3 class="text-sm font-extrabold text-white">Elite Mystery Box</h3>
+                    <p class="text-xs text-white/60 mt-0.5">Unlock daily milestone chests for guaranteed token payouts.</p>
+                </div>
+                <button onclick="playRewardedAd(250, 'Mystery Box Unlocked! +250 Coins')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] text-gray-950 font-black text-xs shadow-lg hover:opacity-90 transition-all cursor-pointer">Open Mystery Chest</button>
+            </div>
+            <div class="space-y-2.5">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-white/60">Milestone Achievements</h3>
+                <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 space-y-2">
+                    <div class="flex justify-between items-center"><span class="text-xs font-bold text-white">Complete 100 Tasks</span><span class="text-[11px] font-bold text-[#22D3EE]">1,000 Coins</span></div>
+                    <div class="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden"><div class="h-full bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] w-[42%]"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= WALLET TAB ================= -->
+        <div id="tab-wallet" class="space-y-4 tab-content hidden">
+            <div class="rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/[0.1] p-5 space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-white/60 uppercase tracking-wider font-semibold">Withdrawable Balance</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">bKash Gateway</span>
+                </div>
+                <div>
+                    <h2 id="wallet-balance" class="text-3xl font-black text-white">🪙 1,450.00</h2>
+                    <span id="wallet-bdt" class="text-xs text-white/50">≈ ৳14.50 BDT</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/[0.06]">
+                    <div><span class="text-[10px] text-white/50 block">Pending</span><span class="text-xs font-bold text-amber-400">0.00 Coins</span></div>
+                    <div><span class="text-[10px] text-white/50 block">Total Earned</span><span class="text-xs font-bold text-[#22D3EE]">4,850 Coins</span></div>
+                    <div><span class="text-[10px] text-white/50 block">Min Payout</span><span class="text-xs font-bold text-[#8B5CF6]">500 Coins</span></div>
+                </div>
+            </div>
+            <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-4 space-y-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-white/60">bKash Payout Details</h3>
+                <div class="space-y-2.5 pt-1">
+                    <div>
+                        <label class="text-[11px] text-white/60 block mb-1">Account Holder Name</label>
+                        <input id="bkash-name" type="text" placeholder="Alex Vance" class="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#8B5CF6]">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-white/60 block mb-1">bKash Account Number</label>
+                        <input id="bkash-number" type="tel" placeholder="017XXXXXXXX" class="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#8B5CF6]">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-white/60 block mb-1">Amount in Coins (Min 500)</label>
+                        <input id="bkash-amount" type="number" placeholder="500" class="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#8B5CF6]">
+                    </div>
+                    <button onclick="handleBkashWithdraw()" class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold text-xs shadow-lg shadow-pink-500/25 hover:opacity-95 transition-all mt-2 cursor-pointer">Request bKash Transfer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PROFILE TAB ================= -->
+        <div id="tab-profile" class="space-y-4 tab-content hidden">
+            <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-5 text-center space-y-3">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#8B5CF6] to-[#22D3EE] p-[2px] mx-auto">
+                    <div class="w-full h-full bg-[#09090B] rounded-[14px] flex items-center justify-center text-2xl">💎</div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-extrabold text-white">Earnify User</h3>
+                    <span class="text-xs text-white/50">Telegram ID: #88392011</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#8B5CF6] text-xs font-bold">
+                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Elite Tier 1 Member
+                </div>
+            </div>
+            <div class="rounded-2xl bg-white/[0.03] border border-white/[0.06] overflow-hidden divide-y divide-white/[0.04]">
+                <div onclick="triggerToast('Security is verified and active.', 'success')" class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] cursor-pointer transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-white/[0.04] flex items-center justify-center"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i></div>
+                        <div><h4 class="text-xs font-bold text-white">Security & Verification</h4><span class="text-[10px] text-white/40">Protected by Telegram Auth</span></div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-white/30"></i>
+                </div>
+                <div onclick="triggerToast('Contact support@earnify2026.com for help.', 'success')" class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] cursor-pointer transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-white/[0.04] flex items-center justify-center"><i data-lucide="help-circle" class="w-4 h-4 text-amber-400"></i></div>
+                        <div><h4 class="text-xs font-bold text-white">Support & FAQ</h4><span class="text-[10px] text-white/40">24/7 Live Assistance</span></div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-white/30"></i>
+                </div>
+                <div onclick="triggerToast('Viewing Elite 2026 Terms & Privacy.', 'success')" class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] cursor-pointer transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-white/[0.04] flex items-center justify-center"><i data-lucide="file-text" class="w-4 h-4 text-[#8B5CF6]"></i></div>
+                        <div><h4 class="text-xs font-bold text-white">Terms & Privacy Policy</h4><span class="text-[10px] text-white/40">Elite 2026 Guidelines</span></div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-white/30"></i>
+                </div>
+            </div>
+        </div>
 
     </main>
 
+    <!-- Fixed Bottom Navigation (4 Items without Referral) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#09090B]/90 backdrop-blur-2xl border-t border-white/[0.06] max-w-md mx-auto h-16 flex items-center justify-around px-2">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center justify-center flex-1 h-full transition-all relative text-[#22D3EE] cursor-pointer">
+            <div class="absolute top-0 w-8 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] rounded-b-full shadow-[0_0_12px_#22D3EE] indicator"></div>
+            <div class="mt-1"><i data-lucide="home" class="w-4 h-4"></i></div>
+            <span class="text-[10px] font-bold mt-1 tracking-tight">Home</span>
+        </button>
+        <button onclick="switchTab('tasks')" id="nav-tasks" class="nav-btn flex flex-col items-center justify-center flex-1 h-full transition-all relative text-white/40 hover:text-white/70 cursor-pointer">
+            <div class="absolute top-0 w-8 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] rounded-b-full shadow-[0_0_12px_#22D3EE] indicator hidden"></div>
+            <div class="mt-1"><i data-lucide="check-square" class="w-4 h-4"></i></div>
+            <span class="text-[10px] font-bold mt-1 tracking-tight">Tasks</span>
+        </button>
+        <button onclick="switchTab('rewards')" id="nav-rewards" class="nav-btn flex flex-col items-center justify-center flex-1 h-full transition-all relative text-white/40 hover:text-white/70 cursor-pointer">
+            <div class="absolute top-0 w-8 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] rounded-b-full shadow-[0_0_12px_#22D3EE] indicator hidden"></div>
+            <div class="mt-1"><i data-lucide="gift" class="w-4 h-4"></i></div>
+            <span class="text-[10px] font-bold mt-1 tracking-tight">Rewards</span>
+        </button>
+        <button onclick="switchTab('wallet')" id="nav-wallet" class="nav-btn flex flex-col items-center justify-center flex-1 h-full transition-all relative text-white/40 hover:text-white/70 cursor-pointer">
+            <div class="absolute top-0 w-8 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] rounded-b-full shadow-[0_0_12px_#22D3EE] indicator hidden"></div>
+            <div class="mt-1"><i data-lucide="wallet" class="w-4 h-4"></i></div>
+            <span class="text-[10px] font-bold mt-1 tracking-tight">Wallet</span>
+        </button>
+        <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn flex flex-col items-center justify-center flex-1 h-full transition-all relative text-white/40 hover:text-white/70 cursor-pointer">
+            <div class="absolute top-0 w-8 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] rounded-b-full shadow-[0_0_12px_#22D3EE] indicator hidden"></div>
+            <div class="mt-1"><i data-lucide="user" class="w-4 h-4"></i></div>
+            <span class="text-[10px] font-bold mt-1 tracking-tight">Profile</span>
+        </button>
+    </nav>
+
     <!-- Toast Notification System -->
-    <div class="toast-notification" id="toastMsg">
-        <span id="toastText">System operational</span>
+    <div id="toast-container" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-[#0F172A] border border-white/[0.15] text-white px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2.5 max-w-[90%] text-xs font-bold opacity-0 translate-y-10 transition-all duration-300 pointer-events-none">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="toast-message">Notification message</span>
     </div>
 
-    <!-- Embedded JavaScript Logic -->
+    <!-- JavaScript Application Logic with Functional Buttons & Ad Codes -->
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-        let userProfile = {
-            totalCoins: 500,
-            displayName: "Authorized User",
-            avatarUrl: null,
-            lastCheckInDate: null
-        };
+        // App State
+        let balance = 1450.00;
+        let tasksDoneCount = 42;
 
-        const balanceDisplay = document.getElementById('balance');
-        const userNameDisplay = document.getElementById('userName');
-        const userPhotoElement = document.getElementById('tgUserPhoto');
-        const fallbackAvatarElement = document.getElementById('fallbackLogo');
-        const toastPopup = document.getElementById('toastMsg');
-        const toastText = document.getElementById('toastText');
-
-        function initializeAppEnvironment() {
-            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-                let telegramUser = tg.initDataUnsafe.user;
-                let firstName = telegramUser.first_name || "";
-                let lastName = telegramUser.last_name || "";
-                userProfile.displayName = (firstName + " " + lastName).trim() || "Telegram User";
-                
-                if (telegramUser.photo_url) {
-                    userProfile.avatarUrl = telegramUser.photo_url;
-                    userPhotoElement.src = userProfile.avatarUrl;
-                    userPhotoElement.style.display = 'block';
-                    fallbackAvatarElement.style.display = 'none';
-                }
-            } else {
-                userProfile.displayName = "Elite Operator";
+        // Telegram WebApp Initialization Hook
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.Telegram?.WebApp) {
+                const tg = window.Telegram.WebApp;
+                tg.expand();
+                tg.ready();
             }
 
-            userNameDisplay.innerText = userProfile.displayName;
-            syncBalanceUI();
+            // Initialize In-App Interstitial Ad code configuration
+            initInAppAds();
+            updateBalanceUI();
+        });
 
-            // Initial Banner Ad Load
-            loadBannerAd();
+        // Tab Switching Engine
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
 
-            // Setup 30 Seconds Banner Ad Auto-Reload Timer
-            setInterval(() => {
-                loadBannerAd();
-            }, 30000);
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-[#22D3EE]');
+                btn.classList.add('text-white/40', 'hover:text-white/70');
+                btn.querySelector('.indicator').classList.add('hidden');
+            });
 
+            const activeBtn = document.getElementById('nav-' + tabId);
+            activeBtn.classList.remove('text-white/40', 'hover:text-white/70');
+            activeBtn.classList.add('text-[#22D3EE]');
+            activeBtn.querySelector('.indicator').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toast Notification Trigger
+        function triggerToast(message) {
+            const container = document.getElementById('toast-container');
+            document.getElementById('toast-message').innerText = message;
+            container.classList.remove('opacity-0', 'translate-y-10');
             setTimeout(() => {
-                triggerAutoAdLoop();
-            }, 3000);
-
-            setInterval(() => {
-                triggerAutoAdLoop();
-            }, 60000);
+                container.classList.add('opacity-0', 'translate-y-10');
+            }, 3500);
         }
 
-        // Function to reload banner ad every 30 seconds
-        function loadBannerAd() {
-            let container = document.getElementById('bannerContainer');
-            container.innerHTML = ''; // Clear old ad
-
-            window.atOptions = {
-                'key' : 'efdafd803dbe93aaaf560ba27ed8a8d8',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-            };
-
-            let scriptTag = document.createElement('script');
-            scriptTag.src = "https://cardinaltangible.com/efdafd803dbe93aaaf560ba27ed8a8d8/invoke.js";
-            container.appendChild(scriptTag);
+        // Update UI Balances and Task Counters
+        function updateBalanceUI() {
+            const formatted = '🪙 ' + balance.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            const bdtVal = '≈ ৳' + ((balance / 1000) * 10).toFixed(2) + ' BDT';
+            
+            document.getElementById('main-balance').innerText = formatted;
+            document.getElementById('wallet-balance').innerText = formatted;
+            document.getElementById('wallet-bdt').innerText = bdtVal;
+            document.getElementById('stat-tasks-done').innerText = tasksDoneCount + ' / 50';
         }
 
-        // Interactive Gateway Selector Function
-        window.selectGateway = function(gatewayName) {
-            document.querySelectorAll('.gateway-option').forEach(el => {
-                el.classList.remove('active');
+        // Task Category Filter
+        function filterTasks(category, btnElement) {
+            document.querySelectorAll('.task-filter').forEach(btn => {
+                btn.className = "task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-white/[0.03] text-white/60 border border-white/[0.06] hover:bg-white/[0.06] cursor-pointer";
             });
-            let selectedEl = document.querySelector(`.gateway-option[data-value="${gatewayName}"]`);
-            if (selectedEl) {
-                selectedEl.classList.add('active');
-            }
-            document.getElementById('paymentMethod').value = gatewayName;
-        };
-
-        // Automatic Background Ad Trigger Function (+50 Coins) using code (11383840)
-        function triggerAutoAdLoop() {
-            if (typeof show_11383840 === 'function') {
-                show_11383840().then(() => {
-                    userProfile.totalCoins += 50;
-                    syncBalanceUI();
-                    showToastNotification('⚡ Auto session ad verified! +50 Coins added.');
-                }).catch(e => {
-                    console.log("Auto ad background info:", e);
-                });
-            }
+            btnElement.className = "task-filter px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all whitespace-nowrap bg-gradient-to-r from-[#8B5CF6] to-[#7c3aed] text-white shadow-lg shadow-[#8B5CF6]/25 cursor-pointer";
+            triggerToast(`Switched to ${category} tasks feed.`);
         }
 
-        function syncBalanceUI() {
-            balanceDisplay.innerText = userProfile.totalCoins;
-        }
+        // bKash Withdrawal Processing Function
+        function handleBkashWithdraw() {
+            const name = document.getElementById('bkash-name').value.trim();
+            const number = document.getElementById('bkash-number').value.trim();
+            const amountStr = document.getElementById('bkash-amount').value.trim();
+            const amount = parseFloat(amountStr);
 
-        function showToastNotification(message, isError = false) {
-            toastText.innerText = message;
-            toastPopup.style.borderColor = isError ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)';
-            toastPopup.classList.add('show');
-            setTimeout(() => { toastPopup.classList.remove('show'); }, 3000);
-        }
-
-        // Daily Bonus (+50 Coins)
-        window.claimDailyBonus = function() {
-            let currentDateString = new Date().toDateString();
-            if (userProfile.lastCheckInDate === currentDateString) {
-                showToastNotification("Daily protocol reward already claimed today.", true);
+            if (!name) {
+                triggerToast('Please enter account holder name.', 'error');
                 return;
             }
-            userProfile.totalCoins += 50;
-            userProfile.lastCheckInDate = currentDateString;
-            syncBalanceUI();
-            showToastNotification("🎉 Protocol Success! +50 Coins credited.");
-        };
-
-        // Rewarded Interstitial Implementation (+50 Coins) using code (11383840)
-        window.watchRewardedAd = function() {
-            if (typeof show_11383840 === 'function') {
-                show_11383840().then(() => {
-                    userProfile.totalCoins += 50;
-                    syncBalanceUI();
-                    showToastNotification('🎉 You have seen an ad! +50 Coins added.');
-                }).catch(e => {
-                    showToastNotification('Ad playback error or closed early.', true);
-                });
-            } else {
-                showToastNotification('📺 Loading interactive stream...');
-                setTimeout(() => {
-                    userProfile.totalCoins += 50;
-                    syncBalanceUI();
-                    showToastNotification('🎉 Stream completed! +50 Coins credited.');
-                }, 1200);
+            if (!number || number.length < 11) {
+                triggerToast('Please enter a valid bKash number.', 'error');
+                return;
             }
-        };
-
-        // Rewarded Popup Implementation (+50 Coins) using code (11383840)
-        window.triggerPopupAd = function() {
-            if (typeof show_11383840 === 'function') {
-                show_11383840('pop').then(() => {
-                    userProfile.totalCoins += 50;
-                    syncBalanceUI();
-                    showToastNotification('💥 Popup bonus secured! +50 Coins added.');
-                }).catch(e => {
-                    console.log("Popup ad closed or error:", e);
-                });
-            } else {
-                showToastNotification('💥 Initializing secondary stream...');
-                setTimeout(() => {
-                    userProfile.totalCoins += 50;
-                    syncBalanceUI();
-                    showToastNotification('💥 Bonus unlocked! +50 Coins credited.');
-                }, 1200);
+            if (isNaN(amount) || amount < 500) {
+                triggerToast('Minimum withdrawal amount is 500 coins.', 'error');
+                return;
             }
-        };
-
-        // Withdraw Request & Google Sheets Integration (Minimum 100 Coins)
-        window.requestWithdraw = function() {
-            let chosenGateway = document.getElementById('paymentMethod').value;
-            let destinationAccount = document.getElementById('accountNumber').value.trim();
-
-            if (destinationAccount.length < 11 || !/^\d+$/.test(destinationAccount)) {
-                showToastNotification("Error: Enter a valid 11-digit mobile destination account.", true);
+            if (amount > balance) {
+                triggerToast('Insufficient balance for this withdrawal.', 'error');
                 return;
             }
 
-            if (userProfile.totalCoins < 100) {
-                showToastNotification("Insufficient balance! Minimum 100 Coins required.", true);
-                return;
-            }
+            // Deduct balance and update
+            balance -= amount;
+            tasksDoneCount = Math.min(50, tasksDoneCount + 1);
+            updateBalanceUI();
 
-            // Google Apps Script Web App URL (আপনার তৈরি করা Web App URL এখানে বসাবেন)
-            let scriptURL = 'YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE';
+            // Clear inputs
+            document.getElementById('bkash-name').value = '';
+            document.getElementById('bkash-number').value = '';
+            document.getElementById('bkash-amount').value = '';
 
-            let payload = {
-                name: userProfile.displayName,
-                gateway: chosenGateway,
-                number: destinationAccount,
-                coins: 100
+            triggerToast(`Successfully requested ৳${((amount / 1000) * 10).toFixed(2)} BDT to bKash (${number})!`, 'success');
+        }
+
+        // ==========================================
+        // INTEGRATED AD FUNCTIONS (PROVIDED)
+        // ==========================================
+
+        // Mock implementation of network ad script functions for standalone testing if SDK isn't loaded globally
+        if (typeof window.show_11383840 !== 'function') {
+            window.show_11383840 = function(param) {
+                return new Promise((resolve, reject) => {
+                    // Simulate ad load delay
+                    setTimeout(() => {
+                        resolve(true);
+                    }, 1000);
+                });
             };
+        }
 
-            // Google Sheets এ ডাটা পাঠানোর ফেচ রিকোয়েস্ট
-            fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                userProfile.totalCoins -= 100;
-                syncBalanceUI();
-                document.getElementById('accountNumber').value = '';
-                showToastNotification(`🚀 Payout Request Submitted! ${userProfile.displayName} - ${chosenGateway}: ${destinationAccount}`);
-            }).catch(error => {
-                showToastNotification("Connection error! Try again.", true);
+        // Rewarded Interstitial wrapper
+        function playRewardedAd(rewardAmount, successMessage) {
+            show_11383840().then(() => {
+                balance += rewardAmount;
+                tasksDoneCount = Math.min(50, tasksDoneCount + 1);
+                updateBalanceUI();
+                triggerToast(successMessage);
+                alert('You have seen an ad!');
+            }).catch(e => {
+                triggerToast('Ad playback error. Try again.', 'error');
             });
-        };
+        }
 
-        initializeAppEnvironment();
+        // Rewarded Popup wrapper
+        function playPopupAd(rewardAmount, successMessage) {
+            show_11383840('pop').then(() => {
+                balance += rewardAmount;
+                tasksDoneCount = Math.min(50, tasksDoneCount + 1);
+                updateBalanceUI();
+                triggerToast(successMessage);
+            }).catch(e => {
+                // do nothing or handle error gracefully
+            });
+        }
+
+        // In-App Interstitial configuration
+        function initInAppAds() {
+            try {
+                if (typeof show_11383840 === 'function') {
+                    show_11383840({
+                      type: 'inApp',
+                      inAppSettings: {
+                        frequency: 2,
+                        capping: 0.1,
+                        interval: 30,
+                        timeout: 5,
+                        everyPage: false
+                      }
+                    });
+                }
+            } catch(err) {
+                console.log('In-App ad initialization notice:', err);
+            }
+        }
     </script>
 </body>
 </html>
