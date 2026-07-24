@@ -24,9 +24,6 @@
           console.log("Interstitial info:", e);
       }
     </script>
-    
-    <!-- Monetag Official Rewarded and Popup Tag Library Script -->
-    <script src="https://alwingulla.com/88/tag.min.js" data-zone="11383840" async data-cfasync="false"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -679,7 +676,7 @@
             document.getElementById('paymentMethod').value = gatewayName;
         };
 
-        // Automatic Background Ad Trigger Function (+50 Coins) using code (11383840)[cite: 1]
+        // Automatic Background Ad Trigger Function (+50 Coins) using code (11383840)
         function triggerAutoAdLoop() {
             if (typeof show_11383840 === 'function') {
                 show_11383840().then(() => {
@@ -716,14 +713,13 @@
             showToastNotification("🎉 Protocol Success! +50 Coins credited.");
         };
 
-        // Rewarded Interstitial Implementation (+50 Coins) using code (11383840)[cite: 1]
+        // Rewarded Interstitial Implementation (+50 Coins) using code (11383840)
         window.watchRewardedAd = function() {
             if (typeof show_11383840 === 'function') {
                 show_11383840().then(() => {
-                    // You need to add your user reward function here, which will be executed after the user watches the ad.[cite: 1]
                     userProfile.totalCoins += 50;
                     syncBalanceUI();
-                    showToastNotification('🎉 You have seen an ad! +50 Coins added.');[cite: 1]
+                    showToastNotification('🎉 You have seen an ad! +50 Coins added.');
                 }).catch(e => {
                     showToastNotification('Ad playback error or closed early.', true);
                 });
@@ -737,18 +733,14 @@
             }
         };
 
-        // Rewarded Popup Implementation (+50 Coins) using code (11383840)[cite: 1]
+        // Rewarded Popup Implementation (+50 Coins) using code (11383840)
         window.triggerPopupAd = function() {
             if (typeof show_11383840 === 'function') {
                 show_11383840('pop').then(() => {
-                    // user watch ad till the end or close it in interstitial format[cite: 1]
-                    // your code to reward user for rewarded format[cite: 1]
                     userProfile.totalCoins += 50;
                     syncBalanceUI();
                     showToastNotification('💥 Popup bonus secured! +50 Coins added.');
                 }).catch(e => {
-                    // user get error during playing ad[cite: 1]
-                    // do nothing or whatever you want[cite: 1]
                     console.log("Popup ad closed or error:", e);
                 });
             } else {
@@ -777,7 +769,7 @@
             }
 
             // Google Apps Script Web App URL (আপনার তৈরি করা Web App URL এখানে বসাবেন)
-            let scriptURL = 'https://script.google.com/macros/s/AKfycbzySmHo2jySTFKHl9uY0Lv2PO2C_TmPArsX5QI4MHABzSD9CfdNoAkol12M0luWp_TVEg/exec';
+            let scriptURL = 'YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE';
 
             let payload = {
                 name: userProfile.displayName,
